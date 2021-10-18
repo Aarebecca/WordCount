@@ -1,0 +1,38 @@
+{
+	"pluginName": "字数统计",
+	"version": "0.1.0",
+	"description": "字数统计",
+	"author": "Aaron",
+	"main": "index.html",
+	"logo": "logo.png",
+	"platform": [
+		"win32",
+		"darwin",
+		"linux"
+	],
+	"pluginSetting": {
+		"single": true,
+		"height": 0
+	},
+	"features": [
+		{
+			"code": "wordcount",
+			"explain": "文本统计",
+			"platform": [
+				"win32",
+				"darwin",
+				"linux"
+			],
+			"cmds": [
+				"文本",
+				"字数",
+				"统计",
+				{
+					"type": "over",
+					"label" :"统计文本次数",
+					"minLength": 1
+				}
+			]
+		}
+	]
+}

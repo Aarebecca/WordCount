@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordCount</title>
+    <link rel="stylesheet" href="bulma.css">
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field is-horizontal is-info">
+                            <div class="field-body is-info">
+                                <div class="field">
+                                    <div class="control">
+                                        <lt-mirror style="display: none;">
+                                            <lt-highlighter contenteditable="false"
+                                                style="display: none; z-index: 1 !important;">
+                                                <lt-div spellcheck="false" class="lt-highlighter__wrapper"
+                                                    style="width: 562px !important; height: 308px !important; transform: none !important; transform-origin: 282px 155px !important; zoom: 1 !important; margin-top: 1px !important; margin-left: 1px !important;">
+                                                    <lt-div class="lt-highlighter__scrollElement"
+                                                        style="top: 0px !important; left: 0px !important; width: 562px !important; height: 308px !important;">
+                                                    </lt-div>
+                                                </lt-div>
+                                            </lt-highlighter>
+                                            <lt-div spellcheck="false" class="lt-mirror__wrapper notranslate"
+                                                data-lt-scroll-top="0" data-lt-scroll-left="0"
+                                                data-lt-scroll-top-scaled="0" data-lt-scroll-left-scaled="0"
+                                                data-lt-scroll-top-scaled-and-zoomed="0"
+                                                data-lt-scroll-left-scaled-and-zoomed="0"
+                                                style="border: 1px solid rgb(219, 219, 219) !important; border-radius: 3px !important; direction: ltr !important; font: 400 16px / 24px BlinkMacSystemFont, -apple-system, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif !important; font-feature-settings: normal !important; font-kerning: auto !important; hyphens: manual !important; letter-spacing: normal !important; line-break: auto !important; margin: 0px !important; padding: 10px !important; text-align: start !important; text-decoration: none solid rgb(54, 54, 54) !important; text-indent: 0px !important; text-rendering: auto !important; text-transform: none !important; transform: none !important; transform-origin: 282px 155px !important; unicode-bidi: normal !important; white-space: pre-wrap !important; word-spacing: 0px !important; overflow-wrap: break-word !important; writing-mode: horizontal-tb !important; zoom: 1 !important; -webkit-locale: auto !important; -webkit-rtl-ordering: logical !important; width: 542px !important; height: 288px !important;">
+                                                <lt-div class="lt-mirror__canvas"
+                                                    style="margin-top: 0px !important; margin-left: 0px !important; width: 542px !important; height: 288px !important;">
+                                                </lt-div>
+                                            </lt-div>
+                                        </lt-mirror><textarea class="textarea" placeholder="输入统计字数的内容:" rows="12"
+                                            id="content" autofocus="" spellcheck="false" data-gramm="false"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-right">
+
+                            <p class="control"> <a class="button is-light" id="reset" type="reset" value="重新输入"
+                                    name="reset" onclick="clearContent()"> 重新输入 </a> </p>
+                        </div>
+                        <div class="field is-grouped is-grouped-multiline"> <span class="tag is-medium"> 共计： </span>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-dark is-medium" id="字符">0</span>
+                                    <span class="tag is-primary is-medium">个字符</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-dark is-medium" id="中文">0</span>
+                                    <span class="tag is-primary is-medium">个中文字符</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-dark is-medium" id="单词">0</span>
+                                    <span class="tag is-primary is-medium">个单词</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-dark is-medium" id="数据">0</span>
+                                    <span class="tag is-primary is-medium">个数据</span> </div>
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-multiline"> <span class="tag"> 包含： </span>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="汉字">0</span> <span
+                                        class="tag is-danger ">个汉字</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="字母">0</span> <span
+                                        class="tag is-danger ">个字母</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="中文标点">0</span> <span
+                                        class="tag is-info ">个标点(全角)</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="英文标点">0</span> <span
+                                        class="tag is-info ">个标点(英标)</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="数字">0</span> <span
+                                        class="tag is-warning ">个数字</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="行段">0</span> <span
+                                        class="tag is-warning ">行/段</span> </div>
+                            </div>
+                            <div class="control">
+                                <div class="tags has-addons"> <span class="tag is-light" id="不可见"">0</span> <span
+                                        class="tag is-warning ">个不可见字符</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script language="javascript">
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        window.onload = ()=>{
+            var EventUtil = function () {};
+            EventUtil.addEventHandler = function (obj, EventType, Handler) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(EventType, Handler, false);
+                } else if (obj.attachEvent) {
+                    obj.attachEvent('on' + EventType, Handler);
+                } else {
+                    obj['on' + EventType] = Handler;
+                }
+            }
+            if ($("content")) {
+                EventUtil.addEventHandler($('content'), 'propertychange', CountChineseCharacters);
+                EventUtil.addEventHandler($('content'), 'input', CountChineseCharacters);
+            }
+        }
+        
+
+        function CountChineseCharacters() {
+            var str = $('content').value.replace(/\r\n/g, "\n");
+            var t_str = str.replace(/\n/g, '');
+            var w_c_str = str.match(/[\u4e00-\u9fa5]/g) || [];
+            var w_e_str = str.match(/\b\w+\b/g) || [];
+            // var w_n_str = str.match(/\b\d+\b/g) || [];
+            var e_p = t_str.match(
+                /[|\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g
+            ) || [];
+
+            var sTotal = 0;
+            for (var i = 0; i < t_str.length; i++) {
+                var c = t_str.charAt(i);
+                if (c.match(/[^\x00-\xff]/)) sTotal++;
+            }
+
+            var e = t_str.match(/[A-Za-z]/g) || [];
+            var eTotal = e.length;
+
+            var n = t_str.match(/[0-9]/g) || [];
+            var nTotal = n.length;
+
+            var part = 0;
+            var s_ma = str.split("\n");
+            for (var i = 0; i < s_ma.length; i++) {
+                if (s_ma[i].length > 0) part++;
+            }
+            
+            let invisiable = 0
+            let iv = t_str.match(/\s/g) || []
+            let ivTotal = iv.length
+
+            let w_n_str = []
+            let pattern = new RegExp("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$")
+            let temp = str.split(/\s/g)
+            temp.forEach(item=>{
+                if(["", "-", "+"].indexOf(item) == -1 && pattern.test(item)){
+                    w_n_str.push(item)
+                }
+            })
+
+            // let 字符, 中文, 单词, 数据, 汉字, 字母, 中文标点, 英文标点, 数字, 行段, 不可见 = 0 
+
+            $('字符').innerText = t_str.length;
+            $('中文').innerText = sTotal;
+            $('单词').innerText = w_e_str.length - w_n_str.length;
+            $('数据').innerText = w_n_str.length;
+
+            $('汉字').innerText = w_c_str.length;
+            $('字母').innerText = eTotal;
+            $('中文标点').innerText = sTotal - w_c_str.length;
+            $('英文标点').innerText = e_p.length;
+            $('数字').innerText = nTotal;
+            $('行段').innerText = part;
+            $('不可见').innerText = ivTotal
+
+        }
+
+        function clearContent() {
+            $("content").value = ""
+            CountChineseCharacters()
+        }
+
+        utools.onPluginEnter(({
+            code,
+            type,
+            payload,
+            optional
+        }) => {
+            if (type == "over") {
+                $("content").innerText = payload
+                CountChineseCharacters()
+            }
+        })
+    </script>
+
+
+
+</body>
+
+</html>
